@@ -11,8 +11,10 @@ export const DropdownLoggedIn = ({setDropdown}) => {
 
     
     const logoutCallBack = useCallback(() => {
-        handleLogout();
-    }, [])
+        logout();
+        navigate("/");
+        setDropdown(false);
+   }, [])
 
     function handleLogout() {
          logout();
