@@ -1,6 +1,6 @@
 import { ProductCard } from "../../components";
 import { FilterBar } from "./components/FilterBar";
-import { useState, useEffect, useCallback} from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
 import { useFilter } from "../../context";
@@ -14,23 +14,18 @@ export const ProductsList = () => {
   const search = useLocation().search;
   const searchTerm = new  URLSearchParams(search).get("q");
 
-  const initialListCallBack = useCallback((data) => {
-    initialProductList(data);
-  }, [initialProductList]);
-
   useEffect(()=> {
     async function fetchProducts() {
       try {
         const data = await getProductList(searchTerm);
-        // initialProductList(data);
-        initialListCallBack(data);
+        initialProductList(data);
       } catch(error) {
         toast.error(error.message, { closeButton: true, position: "bottom-center" });
       }
     }
     fetchProducts();
-  }, [searchTerm, initialListCallBack]);
-
+    // eslint-disable-next-line
+  }, [searchTerm]);
 
   return (
     <main>
