@@ -29,7 +29,7 @@ export const ProductsList = () => {
       }
     }
     fetchProducts();
-  }, [searchTerm]);
+  }, [searchTerm, initialListCallBack]);
 
 
   return (
