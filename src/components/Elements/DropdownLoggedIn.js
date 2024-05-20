@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { getUser } from "../../services";
 import { toast } from "react-toastify";
 
@@ -9,31 +9,23 @@ export const DropdownLoggedIn = ({setDropdown}) => {
     const navigate = useNavigate();
     const [user, setUser] = useState({});
 
-    
-    const logoutCallBack = useCallback(() => {
+    function handleLogout() {
         logout();
         navigate("/");
         setDropdown(false);
-   }, [])
-
-    function handleLogout() {
-         logout();
-         navigate("/");
-         setDropdown(false);
     }
- // <span onClick={handleLogout} className="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</span>
 
     useEffect(()=> {
         async function fetchData(){
             try {
                 const data = await getUser();
-                data.email ? setUser(data) : logoutCallBack();
+                data.email ? setUser(data) : handleLogout();
             } catch(error) {
                 toast.error(error.message, { closeButton: true, position: "bottom-center" });
             }
         }
         fetchData();
-    },[logoutCallBack]);
+    });
 
   return (
     <div id="dropdownAvatar" className="select-none	absolute top-10 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
