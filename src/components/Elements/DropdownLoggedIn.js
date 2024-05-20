@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../services";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getUser } from "../../services";
 import { toast } from "react-toastify";
 
@@ -9,23 +9,30 @@ export const DropdownLoggedIn = ({setDropdown}) => {
     const navigate = useNavigate();
     const [user, setUser] = useState({});
 
-    function handleLogout() {
+    
+    const logoutCallBack = useCallback(() => {
         logout();
         navigate("/");
         setDropdown(false);
-    }
+    }, [])
+
+ //   const logoutCallBack = useCallback function handleLogout() {
+//      logout();
+ //       navigate("/");
+ //       setDropdown(false);
+ //   }
 
     useEffect(()=> {
         async function fetchData(){
             try {
                 const data = await getUser();
-                data.email ? setUser(data) : handleLogout();
+                data.email ? setUser(data) : logoutCallBack();
             } catch(error) {
                 toast.error(error.message, { closeButton: true, position: "bottom-center" });
             }
         }
         fetchData();
-    },[handleLogout]);
+    },[logoutCallBack]);
 
   return (
     <div id="dropdownAvatar" className="select-none	absolute top-10 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
