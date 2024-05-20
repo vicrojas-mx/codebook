@@ -16,7 +16,7 @@ export const ProductsList = () => {
 
   const initialListCallBack = useCallback((data) => {
     initialProductList(data);
-  }, []);
+  }, [initialProductList]);
 
   useEffect(()=> {
     async function fetchProducts() {
