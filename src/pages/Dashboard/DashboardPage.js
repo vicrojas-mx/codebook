@@ -9,9 +9,6 @@ export const DashboardPage = () => {
 
     useTitle("My Dashboard");
     const [orders, setOrders] = useState([]);
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const cbid = JSON.parse(sessionStorage.getItem("cbid"));
- 
 
     useEffect(() => {
         async function fetchOrders(){
