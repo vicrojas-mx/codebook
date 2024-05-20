@@ -11,16 +11,15 @@ export const DropdownLoggedIn = ({setDropdown}) => {
 
     
     const logoutCallBack = useCallback(() => {
-        logout();
-        navigate("/");
-        setDropdown(false);
+        handleLogout();
     }, [])
 
- //   const logoutCallBack = useCallback function handleLogout() {
-//      logout();
- //       navigate("/");
- //       setDropdown(false);
- //   }
+    function handleLogout() {
+         logout();
+         navigate("/");
+         setDropdown(false);
+    }
+ // <span onClick={handleLogout} className="cursor-pointer block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Log out</span>
 
     useEffect(()=> {
         async function fetchData(){
