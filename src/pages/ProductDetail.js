@@ -3,9 +3,11 @@ import { useState, useEffect } from "react";
 import { Rating } from "../components";
 import { useTitle } from "../hooks/useTitle";
 import { useCart } from "../context";
-import { getProduct } from "../services";
 import { toast } from "react-toastify";
-  export const ProductDetail = () => {
+import { getProduct } from "../services";
+
+
+ export const ProductDetail = () => {
 
     const { id } = useParams();
     const [product, setProduct] = useState({});
