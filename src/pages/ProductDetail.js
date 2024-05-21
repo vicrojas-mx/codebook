@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { Rating } from "../components";
 import { useTitle } from "../hooks/useTitle";
 import { useCart } from "../context";
-import { toast } from "react-toastify";
 import { getProduct } from "../services";
+import { toast } from "react-toastify";
 
 
  export const ProductDetail = () => {
